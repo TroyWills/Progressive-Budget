@@ -8,8 +8,8 @@
     "start:prod": "npm run build && node server.js",
     "start:dev": "concurrently \"npm run server\" \"cd public && npm run start\"",
     "server": "nodemon server.js",
-    "build": "cd public && npm run build",
-      },
+    "build": "cd public && npm run build"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/coding-boot-camp/unit18hw.git"
