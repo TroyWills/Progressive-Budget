@@ -1,6 +1,11 @@
 const FILES_TO_CACHE = [
-    'icons/icon-192x192.png',
-    'icons/icon-515x512.png'
+    '/',
+    '/index.html',
+    '/index.js',
+    '/manifest.json',
+    '/style.css',
+    '/icons/icon-192x192.png',
+    '/icons/icon-515x512.png',
   ];
   
   const STATIC_CACHE = "static-cache-v1";
@@ -10,8 +15,17 @@ const FILES_TO_CACHE = [
     event.waitUntil(
       caches
         .open(STATIC_CACHE)
-        .then(cache => cache.addAll(FILES_TO_CACHE))
-        .then(() => self.skipWaiting())
+        // .then(cache => cache.addAll(FILES_TO_CACHE))
+        .then(cache => {
+          return Promise.all(
+            FILES_TO_CACHE.map(url => {
+              return cache.add(url).catch(err => {
+                console.log(url + ' ' + err)
+              })
+            })
+          )
+        })
+        // .then(() => self.skipWaiting())
     );
   });
   
